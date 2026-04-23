@@ -12,7 +12,7 @@ public class UsuarioDao {
         this.dao = dao;
     }
 
-     public void create(Usuario usuario) throws Exception {
+     public void create(Usuario usuario) throws SQLException {
         dao.create(usuario);
     }
 
