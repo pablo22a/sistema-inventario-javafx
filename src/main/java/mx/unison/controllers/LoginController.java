@@ -9,7 +9,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import mx.unison.controllers.MainController;
 import mx.unison.database.DatabaseManager;
 import mx.unison.models.Usuario;
 import mx.unison.service.AuthService;
@@ -25,14 +24,28 @@ import java.sql.SQLException;
  */
 public class LoginController {
 
+    /** Campo de texto para que el usuario introduzca su nombre de usuario. */
     @FXML private TextField usernameField;
+
+    /** Campo de texto encriptado para que el usuario introduzca su contraseña. */
     @FXML private PasswordField passwordField;
+
+    /** Casilla de verificación opcional para recordar las credenciales del usuario. */
     @FXML private CheckBox rememberCheckBox;
+
+    /** Botón para desencadenar el proceso de autenticación. */
     @FXML private Button loginButton;
+
+    /** Botón para cerrar y salir completamente de la aplicación. */
     @FXML private Button exitButton;
+
+    /** Etiqueta de texto de color rojo utilizada para mostrar mensajes de error al usuario. */
     @FXML private Label errorLabel;
 
+    /** Controlador de navegación principal, utilizado para cambiar a la vista del sistema tras el login. */
     private MainController mainController;
+
+    /** Servicio que maneja la lógica de validación de credenciales contra la base de datos. */
     private AuthService authService;
 
     /**

@@ -13,8 +13,13 @@ import java.time.LocalDateTime;
  * verificación de contraseñas y actualización de registros de login.
  */
 public class AuthService {
+    /** DAO encargado de gestionar los usuarios para la autenticación. */
     private UsuarioDao usuarioDao;
 
+    /**
+     * Constructor del servicio de autenticación.
+     * @param usuarioDao El DAO inyectado para realizar consultas de usuarios.
+     */
     public AuthService(UsuarioDao usuarioDao) {
         this.usuarioDao = usuarioDao;
     }

@@ -20,26 +20,54 @@ import java.util.List;
  */
 public class ProductoFormController {
 
+    /** Campo de texto para ingresar o editar el nombre del producto. */
     @FXML
     private TextField nombreField;
+
+    /** Área de texto para ingresar o editar la descripción detallada del producto. */
     @FXML
     private TextArea descripcionArea;
+
+    /** Control numérico de incremento/decremento para definir la cantidad en stock del producto. */
     @FXML
     private Spinner<Integer> cantidadSpinner;
+
+    /** Campo de texto configurado para aceptar únicamente valores numéricos y decimales para el precio. */
     @FXML
     private TextField precioField;
+
+    /** Menú desplegable que muestra la lista de almacenes disponibles para asignar el producto. */
     @FXML
     private ComboBox<Almacen> almacenCombo;
+
+    /** Botón para confirmar la acción de guardado en la base de datos. */
     @FXML
     private Button guardarBtn;
+
+    /** Botón para descartar los cambios y cerrar el formulario. */
     @FXML
     private Button cancelarBtn;
 
+    /** Gestor de conexiones y DAOs para interactuar con la base de datos SQLite. */
     private DatabaseManager dbManager;
+
+    /** Nombre del usuario activo, utilizado para el registro de auditoría (quién creó/modificó). */
     private String usuarioActual;
+
+    /** Instancia del producto a editar. Si es nulo, significa que el formulario está en modo "Creación". */
     private Producto productoActual;
+
+    /** Referencia al controlador padre para poder solicitar la recarga de la tabla tras guardar. */
     private ProductosViewController parentController;
 
+    /**
+     * Constructor del controlador del formulario de productos.
+     *
+     * @param dbManager Gestor de la base de datos.
+     * @param usuarioActual Nombre del usuario que ha iniciado sesión.
+     * @param productoActual El producto a editar, o nulo si se va a crear uno nuevo.
+     * @param parentController Controlador de la vista principal de productos.
+     */
     public ProductoFormController(DatabaseManager dbManager, String usuarioActual,
                                   Producto productoActual, ProductosViewController parentController) {
         this.dbManager = dbManager;
@@ -48,6 +76,11 @@ public class ProductoFormController {
         this.parentController = parentController;
     }
 
+    /**
+     * Método invocado automáticamente por JavaFX tras cargar la vista FXML.
+     * Configura el formateador numérico del precio, los límites del spinner de cantidad,
+     * carga la lista de almacenes y llena los campos si está en modo edición.
+     */
     @FXML
     public void initialize() {
         // Configurar Spinner de cantidad

@@ -20,54 +20,96 @@ import java.sql.SQLException;
  */
 public class MainViewController {
 
+    /** Contenedor principal que estructura el diseño general de la ventana (Sidebar, Topbar y Contenido). */
     @FXML
     private BorderPane rootPane;
 
-    // Sidebar
+    // ================= Sidebar =================
+
+    /** Contenedor vertical del menú lateral izquierdo. */
     @FXML
     private VBox sidebar;
+
+    /** Botón de navegación hacia el panel principal (Dashboard). */
     @FXML
     private Button dashboardBtn;
+
+    /** Botón de navegación hacia el módulo de inventario de productos. */
     @FXML
     private Button productosBtn;
+
+    /** Botón de navegación hacia el módulo de gestión de almacenes. */
     @FXML
     private Button almacenesBtn;
+
+    /** Botón de navegación hacia el módulo de configuración del sistema. */
     @FXML
     private Button configBtn;
+
+    /** Etiqueta que muestra el nombre del usuario activo en el menú lateral. */
     @FXML
     private Label userNameLabel;
+
+    /** Etiqueta que muestra el rol (ej. ADMIN, USUARIO) del usuario activo en el menú lateral. */
     @FXML
     private Label userRoleLabel;
 
-    // Topbar
+    // ================= Topbar =================
+
+    /** Etiqueta de título principal en la barra superior dinámica según la vista actual. */
     @FXML
     private Label pageTitle;
+
+    /** Etiqueta de subtítulo o descripción en la barra superior. */
     @FXML
     private Label pageSubtitle;
 
-    // Content Area
+    // ================= Content Area =================
+
+    /** Contenedor central (Stack) donde se superponen e intercambian las distintas vistas hijas. */
     @FXML
     private StackPane contentStackPane;
+
+    /** Vista del panel de estadísticas o inicio. */
     @FXML
     private VBox dashboardView;
+
+    /** Contenedor donde se inyecta la vista de gestión de productos. */
     @FXML
     private VBox productosView;
+
+    /** Contenedor donde se inyecta la vista de gestión de almacenes. */
     @FXML
     private VBox almacenesView;
+
+    /** Contenedor donde se inyecta la vista de configuración y usuarios. */
     @FXML
     private VBox configView;
 
-    // Stats Labels
+    // ================= Stats Labels =================
+
+    /** Etiqueta en el dashboard que muestra la cantidad total de productos distintos. */
     @FXML
     private Label productosCountLabel;
+
+    /** Etiqueta en el dashboard que muestra la cantidad total de almacenes registrados. */
     @FXML
     private Label almacenesCountLabel;
+
+    /** Etiqueta en el dashboard que muestra la suma total de unidades físicas en stock. */
     @FXML
     private Label stockTotalLabel;
 
+    /** Controlador de nivel superior encargado de la navegación global de ventanas. */
     private MainController mainController;
+
+    /** Proveedor de los DAOs para interactuar con la base de datos. */
     private DatabaseManager dbManager;
+
+    /** Nombre del usuario validado en la sesión actual. */
     private String userName;
+
+    /** Rol o nivel de acceso del usuario para restringir módulos. */
     private String userRole;
 
     /**
@@ -136,7 +178,7 @@ public class MainViewController {
     }
 
     /**
-     * Carga las estadísticas del dashboard.
+     * Carga las estadísticas del dashboard consultando la base de datos.
      */
     private void loadStatistics() {
         try {
@@ -165,11 +207,17 @@ public class MainViewController {
     // MANEJADORES DE NAVEGACIÓN
     // ============================================================================
 
+    /**
+     * Navega a la vista de panel principal (Dashboard).
+     */
     @FXML
     private void handleDashboard() {
         showView(dashboardView, dashboardBtn, "Dashboard", "Bienvenido al sistema");
     }
 
+    /**
+     * Navega a la vista de inventario, cargando dinámicamente el controlador de productos si es necesario.
+     */
     @FXML
     private void handleProductos() {
         showView(productosView, productosBtn, "Gestión de Productos", "Administra tus productos");
@@ -186,7 +234,8 @@ public class MainViewController {
     }
 
     /**
-     * Carga la vista de productos desde el FXML.
+     * Carga la vista de productos desde el FXML instanciando su controlador correspondiente.
+     * @throws Exception Si el archivo FXML no se encuentra o contiene errores de sintaxis.
      */
     private void loadProductosView() throws Exception {
         FXMLLoader loader = new FXMLLoader(
@@ -202,6 +251,9 @@ public class MainViewController {
         productosView.getChildren().add(loader.load());
     }
 
+    /**
+     * Navega a la vista de almacenes, cargando el sub-módulo de forma dinámica la primera vez que se accede.
+     */
     @FXML
     private void handleAlmacenes() {
         showView(almacenesView, almacenesBtn, "Gestión de Almacenes", "Administra tus almacenes");
@@ -218,7 +270,8 @@ public class MainViewController {
     }
 
     /**
-     * Carga la vista de almacenes desde el FXML.
+     * Carga la vista de almacenes desde el FXML instanciando su controlador correspondiente.
+     * @throws Exception Si el archivo FXML no se encuentra o no se puede cargar.
      */
     private void loadAlmacenesView() throws Exception {
         FXMLLoader loader = new FXMLLoader(
@@ -234,6 +287,9 @@ public class MainViewController {
         almacenesView.getChildren().add(loader.load());
     }
 
+    /**
+     * Navega a la vista de configuración general del sistema.
+     */
     @FXML
     private void handleConfig() {
         showView(configView, configBtn, "Configuración", "Administración del sistema");
@@ -247,6 +303,10 @@ public class MainViewController {
         }
     }
 
+    /**
+     * Carga la vista de configuración desde el archivo FXML y asigna su controlador.
+     * @throws Exception Si ocurre un fallo en la carga del recurso.
+     */
     private void loadConfigView() throws Exception {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/views/config.fxml")
@@ -260,7 +320,7 @@ public class MainViewController {
     }
 
     /**
-     * Muestra una vista específica en el StackPane.
+     * Muestra una vista específica en el StackPane ocultando las demás.
      *
      * @param view Vista a mostrar
      * @param button Botón de navegación asociado
@@ -318,7 +378,7 @@ public class MainViewController {
     }
 
     /**
-     * Muestra el dashboard.
+     * Muestra el dashboard por defecto.
      */
     private void showDashboard() {
         showView(dashboardView, dashboardBtn, "Dashboard", "Bienvenido al sistema");

@@ -12,13 +12,26 @@ import mx.unison.database.DatabaseManager;
  * al gestor de base de datos.
  */
 public class MainController {
+
+    /** Ventana principal (Stage) de la aplicación JavaFX donde se montan las escenas. */
     private Stage primaryStage;
+
+    /** Instancia global del gestor de base de datos compartida entre los controladores. */
     private DatabaseManager dbManager;
+
+    /** Escena que contiene la interfaz gráfica de inicio de sesión. */
     private Scene loginScene;
+
+    /** Escena que contiene la interfaz gráfica del panel principal del sistema. */
     private Scene mainScene;
 
+    /** Ancho predeterminado de la ventana principal al iniciar la aplicación. */
     private static final int WINDOW_WIDTH = 1200;
+
+    /** Alto predeterminado de la ventana principal al iniciar la aplicación. */
     private static final int WINDOW_HEIGHT = 800;
+
+    /** Título mostrado en la barra superior de la ventana de la aplicación. */
     private static final String APP_TITLE = "Sistema de Inventario";
 
     /**

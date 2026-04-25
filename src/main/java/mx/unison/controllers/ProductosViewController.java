@@ -25,42 +25,84 @@ import java.util.stream.Collectors;
  */
 public class ProductosViewController {
 
+    /** Campo de texto utilizado para filtrar los productos de la tabla en tiempo real. */
     @FXML
     private TextField searchField;
+
+    /** Tabla principal que muestra el inventario de productos. */
     @FXML
     private TableView<Producto> productosTable;
+
+    /** Columna de la tabla correspondiente al ID único del producto. */
     @FXML
     private TableColumn<Producto, Integer> idColumn;
+
+    /** Columna de la tabla correspondiente al nombre del producto. */
     @FXML
     private TableColumn<Producto, String> nombreColumn;
+
+    /** Columna de la tabla correspondiente a la descripción del producto. */
     @FXML
     private TableColumn<Producto, String> descripcionColumn;
+
+    /** Columna de la tabla correspondiente a la cantidad de unidades en stock. */
     @FXML
     private TableColumn<Producto, Integer> cantidadColumn;
+
+    /** Columna de la tabla correspondiente al precio unitario del producto. */
     @FXML
     private TableColumn<Producto, Double> precioColumn;
+
+    /** Columna de la tabla correspondiente al nombre del almacén donde está ubicado el producto. */
     @FXML
     private TableColumn<Producto, String> almacenColumn;
+
+    /** Botón para abrir el formulario y registrar un nuevo producto. */
     @FXML
     private Button agregarBtn;
+
+    /** Botón para abrir el formulario de edición con el producto seleccionado en la tabla. */
     @FXML
     private Button editarBtn;
+
+    /** Botón para eliminar permanentemente el producto seleccionado en la tabla. */
     @FXML
     private Button eliminarBtn;
+
+    /** Botón para recargar los datos de la base de datos manualmente. */
     @FXML
     private Button actualizarBtn;
 
+    /** Controlador de nivel superior encargado de la navegación global. */
     private MainController mainController;
+
+    /** Gestor de la base de datos para realizar las operaciones CRUD de los productos. */
     private DatabaseManager dbManager;
+
+    /** Nombre del usuario activo actual. */
     private String usuarioActual;
+
+    /** Lista observable enlazada a la tabla para actualización automática de la vista. */
     private ObservableList<Producto> productosObservable;
 
+    /**
+     * Constructor del controlador de la vista de productos.
+     *
+     * @param mainController Controlador principal de la aplicación.
+     * @param dbManager Gestor de conexión a la base de datos.
+     * @param usuarioActual Nombre del usuario que ha iniciado sesión.
+     */
     public ProductosViewController(MainController mainController, DatabaseManager dbManager, String usuarioActual) {
         this.mainController = mainController;
         this.dbManager = dbManager;
         this.usuarioActual = usuarioActual;
     }
 
+    /**
+     * Método invocado automáticamente por JavaFX tras cargar el archivo FXML.
+     * Configura el mapeo de datos en las columnas, los anchos visuales,
+     * el evento de doble clic para editar y el sistema de filtrado.
+     */
     @FXML
     public void initialize() {
         // Configurar columnas de la tabla

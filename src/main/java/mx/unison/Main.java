@@ -6,12 +6,15 @@ import mx.unison.controllers.MainController;
 import mx.unison.database.DatabaseManager;
 
 /**
- * Clase principal de la aplicación.
- *
- * Punto de entrada que inicializa la base de datos
- * y muestra la vista de login.
+ * Clase principal de JavaFX que inicia el ciclo de vida de la aplicación.
  */
 public class Main extends Application {
+
+    /**
+     * Constructor por defecto requerido por el framework JavaFX.
+     * No debe ser invocado manualmente.
+     */
+    public Main() {}
 
     @Override
     public void start(Stage primaryStage) throws Exception {

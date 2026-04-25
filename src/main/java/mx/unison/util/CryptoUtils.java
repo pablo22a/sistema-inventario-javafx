@@ -11,6 +11,14 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 public class CryptoUtils {
 
     /**
+     * Constructor privado para evitar instanciación.
+     * Esta es una clase de utilidades estáticas.
+     */
+    private CryptoUtils() {
+        throw new IllegalStateException("Clase de utilidades (Utility class)");
+    }
+
+    /**
      * Genera un hash BCrypt de una contraseña.
      *
      * @param password Contraseña en texto plano

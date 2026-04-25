@@ -19,20 +19,38 @@ import java.time.LocalDateTime;
  */
 public class AlmacenFormController {
 
-    @FXML
-    private TextField nombreField;
-    @FXML
-    private TextArea ubicacionArea;
-    @FXML
-    private Button guardarBtn;
-    @FXML
-    private Button cancelarBtn;
+    /** Campo de texto para ingresar o editar el nombre del almacén. */
+    @FXML private TextField nombreField;
 
+    /** Área de texto para ingresar o editar la ubicación física del almacén. */
+    @FXML private TextArea ubicacionArea;
+
+    /** Botón para guardar los cambios (crear o actualizar) del almacén. */
+    @FXML private Button guardarBtn;
+
+    /** Botón para cancelar la operación y cerrar el formulario. */
+    @FXML private Button cancelarBtn;
+
+    /** Gestor de la base de datos para realizar operaciones CRUD. */
     private DatabaseManager dbManager;
+
+    /** Nombre del usuario que está realizando la acción. */
     private String usuarioActual;
+
+    /** Almacén que se está editando. Será nulo si se está creando un almacén nuevo. */
     private Almacen almacenActual;
+
+    /** Controlador de la vista principal de almacenes, usado para refrescar la tabla tras guardar. */
     private AlmacenesViewController parentController;
 
+    /**
+     * Constructor del controlador del formulario de almacén.
+     *
+     * @param dbManager Gestor de conexión a la base de datos.
+     * @param usuarioActual Nombre del usuario activo en el sistema.
+     * @param almacenActual Objeto almacén a editar, o nulo si es una creación nueva.
+     * @param parentController Controlador de la vista padre para solicitar la actualización de la tabla.
+     */
     public AlmacenFormController(DatabaseManager dbManager, String usuarioActual,
                                  Almacen almacenActual, AlmacenesViewController parentController) {
         this.dbManager = dbManager;
@@ -41,6 +59,10 @@ public class AlmacenFormController {
         this.parentController = parentController;
     }
 
+    /**
+     * Método invocado automáticamente por JavaFX después de cargar el archivo FXML.
+     * Configura el formulario cargando los datos correspondientes si se trata de una edición.
+     */
     @FXML
     public void initialize() {
         // Si es edición, cargar datos del almacén

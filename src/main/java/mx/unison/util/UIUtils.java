@@ -20,24 +20,58 @@ public class UIUtils {
     // CONSTANTES DE ESTILOS
     // ============================================================================
 
+    /** Clase CSS para aplicar el estilo de botón principal (por defecto azul). */
     public static final String BUTTON_PRIMARY = "button-primary";
+
+    /** Clase CSS para aplicar el estilo de botón secundario (por defecto gris/neutro). */
     public static final String BUTTON_SECONDARY = "button-secondary";
+
+    /** Clase CSS para aplicar el estilo de botón de éxito (por defecto verde). */
     public static final String BUTTON_SUCCESS = "button-success";
+
+    /** Clase CSS para aplicar el estilo de botón de peligro o alerta (por defecto rojo). */
     public static final String BUTTON_DANGER = "button-danger";
 
+    /** Clase CSS para aplicar formato de título principal a una etiqueta. */
     public static final String LABEL_TITLE = "label-title";
+
+    /** Clase CSS para aplicar formato de subtítulo a una etiqueta. */
     public static final String LABEL_SUBTITLE = "label-subtitle";
+
+    /** Clase CSS para aplicar formato de texto informativo o secundario a una etiqueta. */
     public static final String LABEL_INFO = "label-info";
 
+    /** Clase CSS para definir un contenedor con estilo de panel estándar. */
     public static final String PANEL = "panel";
+
+    /** Clase CSS para la sección superior (cabecera) de un panel. */
     public static final String PANEL_HEADER = "panel-header";
+
+    /** Clase CSS para el área de contenido principal de un panel. */
     public static final String PANEL_BODY = "panel-body";
+
+    /** Clase CSS para definir un contenedor con estilo de tarjeta (con sombra y bordes redondeados). */
     public static final String CARD = "card";
 
+    /** Clase CSS para alertas de tipo información. */
     public static final String ALERT_INFO = "alert-info";
+
+    /** Clase CSS para alertas que indican una operación exitosa. */
     public static final String ALERT_SUCCESS = "alert-success";
+
+    /** Clase CSS para alertas que requieren precaución por parte del usuario. */
     public static final String ALERT_WARNING = "alert-warning";
+
+    /** Clase CSS para alertas de error o peligro. */
     public static final String ALERT_DANGER = "alert-danger";
+
+    /**
+     * Constructor privado para ocultar el constructor público implícito.
+     * Esta es una clase de utilidades estáticas y no debe ser instanciada.
+     */
+    private UIUtils() {
+        throw new IllegalStateException("Clase de utilidades (Utility class)");
+    }
 
     // ============================================================================
     // MÉTODOS PARA CREAR BOTONES

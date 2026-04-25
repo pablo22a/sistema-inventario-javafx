@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mx.unison.controllers.MainController;
 import mx.unison.database.DatabaseManager;
 import mx.unison.models.Almacen;
 import mx.unison.util.UIUtils;
@@ -24,41 +23,67 @@ import java.util.stream.Collectors;
  * de almacenes en el sistema.
  */
 public class AlmacenesViewController {
+    /** Campo de texto para búsqueda de almacenes. */
+    @FXML private TextField searchField;
 
-    @FXML
-    private TextField searchField;
-    @FXML
-    private TableView<Almacen> almacenesTable;
-    @FXML
-    private TableColumn<Almacen, Integer> idColumn;
-    @FXML
-    private TableColumn<Almacen, String> nombreColumn;
-    @FXML
-    private TableColumn<Almacen, String> ubicacionColumn;
-    @FXML
-    private TableColumn<Almacen, String> fechaCreacionColumn;
-    @FXML
-    private TableColumn<Almacen, String> ultimoUsuarioColumn;
-    @FXML
-    private Button agregarBtn;
-    @FXML
-    private Button editarBtn;
-    @FXML
-    private Button eliminarBtn;
-    @FXML
-    private Button actualizarBtn;
+    /** Tabla para mostrar los almacenes registrados. */
+    @FXML private TableView<Almacen> almacenesTable;
 
+    /** Columna para mostrar el ID del almacén. */
+    @FXML private TableColumn<Almacen, Integer> idColumn;
+
+    /** Columna para mostrar el nombre del almacén. */
+    @FXML private TableColumn<Almacen, String> nombreColumn;
+
+    /** Columna para mostrar la ubicación del almacén. */
+    @FXML private TableColumn<Almacen, String> ubicacionColumn;
+
+    /** Columna para mostrar la fecha de creación del almacén. */
+    @FXML private TableColumn<Almacen, String> fechaCreacionColumn;
+
+    /** Columna para mostrar el último usuario que modificó el almacén. */
+    @FXML private TableColumn<Almacen, String> ultimoUsuarioColumn;
+
+    /** Botón para agregar un nuevo almacén. */
+    @FXML private Button agregarBtn;
+
+    /** Botón para editar el almacén seleccionado. */
+    @FXML private Button editarBtn;
+
+    /** Botón para eliminar el almacén seleccionado. */
+    @FXML private Button eliminarBtn;
+
+    /** Botón para actualizar la lista de almacenes. */
+    @FXML private Button actualizarBtn;
+
+    /** Controlador principal que gestiona la navegación entre vistas */
     private MainController mainController;
+
+    /** Gestor de la base de datos para realizar operaciones CRUD. */
     private DatabaseManager dbManager;
+
+    /** Nombre del usuario actualmente autenticado. */
     private String usuarioActual;
+
+    /** Lista observable de almacenes para actualizar la tabla en tiempo real. */
     private ObservableList<Almacen> almacenesObservable;
 
+    /**
+     * Constructor del controlador de la vista de almacenes.
+     * @param mainController Controlador de navegación principal.
+     * @param dbManager Gestor de conexión a la base de datos.
+     * @param usuarioActual Usuario que ha iniciado sesión.
+     */
     public AlmacenesViewController(MainController mainController, DatabaseManager dbManager, String usuarioActual) {
         this.mainController = mainController;
         this.dbManager = dbManager;
         this.usuarioActual = usuarioActual;
     }
 
+    /**
+     * Método invocado automáticamente por JavaFX después de cargar el archivo FXML.
+     * Configura la tabla, los listeners y carga los datos iniciales.
+     */
     @FXML
     public void initialize() {
         // Configurar columnas de la tabla

@@ -21,29 +21,62 @@ import java.util.List;
  */
 public class ConfigViewController {
 
+    /** Tabla que muestra la lista de usuarios registrados en el sistema. */
     @FXML private TableView<Usuario> usuariosTable;
+
+    /** Columna de la tabla correspondiente al identificador único del usuario. */
     @FXML private TableColumn<Usuario, Integer> idUsuarioColumn;
+
+    /** Columna de la tabla correspondiente al nombre del usuario. */
     @FXML private TableColumn<Usuario, String> nombreUsuarioColumn;
+
+    /** Columna de la tabla correspondiente al rol (ej. ADMIN, USUARIO). */
     @FXML private TableColumn<Usuario, String> rolColumn;
+
+    /** Columna de la tabla correspondiente a la fecha y hora de su último inicio de sesión. */
     @FXML private TableColumn<Usuario, String> ultimoInicioColumn;
 
+    /** Campo de texto encriptado para introducir la contraseña actual. */
     @FXML private PasswordField passwordActualField;
+
+    /** Campo de texto encriptado para introducir la nueva contraseña deseada. */
     @FXML private PasswordField passwordNuevaField;
+
+    /** Campo de texto encriptado para confirmar la nueva contraseña. */
     @FXML private PasswordField passwordConfirmarField;
 
+    /** Etiqueta que muestra el nombre del usuario que está utilizando el sistema. */
     @FXML private Label usuarioActivoLabel;
 
+    /** Controlador principal usado para gestionar la navegación global (si fuera necesario). */
     private MainController mainController;
+
+    /** Gestor de conexiones y DAOs para interactuar con la base de datos. */
     private DatabaseManager dbManager;
+
+    /** Nombre del usuario activo en la sesión. */
     private String usuarioActual;
+
+    /** Lista observable que vincula los datos de los usuarios con la interfaz gráfica de la tabla. */
     private ObservableList<Usuario> usuariosObservable;
 
+    /**
+     * Constructor del controlador de configuración.
+     *
+     * @param mainController Controlador de navegación principal.
+     * @param dbManager Gestor de conexión a la base de datos SQLite.
+     * @param usuarioActual Nombre del usuario administrador actual.
+     */
     public ConfigViewController(MainController mainController, DatabaseManager dbManager, String usuarioActual) {
         this.mainController = mainController;
         this.dbManager = dbManager;
         this.usuarioActual = usuarioActual;
     }
 
+    /**
+     * Método invocado automáticamente por JavaFX tras cargar la vista FXML.
+     * Configura el mapeo de las columnas de la tabla de usuarios y carga la información inicial.
+     */
     @FXML
     public void initialize() {
         // Configurar columnas de la tabla
@@ -64,7 +97,7 @@ public class ConfigViewController {
     }
 
     /**
-     * Carga todos los usuarios de la base de datos.
+     * Carga todos los usuarios de la base de datos y actualiza la tabla.
      */
     private void cargarUsuarios() {
         try {
@@ -78,7 +111,8 @@ public class ConfigViewController {
     }
 
     /**
-     * Abre el diálogo para agregar un nuevo usuario.
+     * Abre un cuadro de diálogo nativo de JavaFX para agregar un nuevo usuario,
+     * encripta su contraseña y lo guarda en la base de datos.
      */
     @FXML
     private void handleAgregarUsuario() {
@@ -132,7 +166,8 @@ public class ConfigViewController {
     }
 
     /**
-     * Elimina el usuario seleccionado.
+     * Elimina el usuario actualmente seleccionado en la tabla previa validación.
+     * No permite que el usuario activo elimine su propia cuenta.
      */
     @FXML
     private void handleEliminarUsuario() {
@@ -164,7 +199,7 @@ public class ConfigViewController {
     }
 
     /**
-     * Actualiza la lista de usuarios.
+     * Acción vinculada al botón de actualizar para refrescar la lista de usuarios.
      */
     @FXML
     private void handleActualizarUsuarios() {
@@ -172,7 +207,8 @@ public class ConfigViewController {
     }
 
     /**
-     * Cambia la contraseña del usuario activo.
+     * Verifica la contraseña actual, valida que la nueva coincida con la confirmación
+     * y aplica el cambio utilizando un nuevo hash Bcrypt.
      */
     @FXML
     private void handleCambiarPassword() {
@@ -229,7 +265,8 @@ public class ConfigViewController {
     }
 
     /**
-     * Limpia registros innecesarios de la base de datos.
+     * Muestra un cuadro de diálogo para confirmar la limpieza de la base de datos.
+     * (Actualmente es una simulación visual).
      */
     @FXML
     private void handleLimpiarDb() {
