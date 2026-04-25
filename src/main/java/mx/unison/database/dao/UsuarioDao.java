@@ -24,4 +24,12 @@ public class UsuarioDao {
     public List<Usuario> getAll() throws SQLException {
         return dao.queryForAll();
     }
+
+    public void update(Usuario usuario) throws SQLException {
+        dao.update(usuario);
+    }
+
+    public void delete(Usuario usuario) throws SQLException {
+        dao.delete(usuario);
+    }
 }
