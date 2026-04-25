@@ -1,4 +1,4 @@
-package mx.unison.controller;
+package mx.unison.controllers;
 
 import mx.unison.database.Database;
 import mx.unison.views.panel.AlmacenesPanel;
