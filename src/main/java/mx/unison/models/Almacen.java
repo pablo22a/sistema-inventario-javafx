@@ -34,13 +34,13 @@ public class Almacen {
      * Fecha y hora en la que fue creado el almacén
      */
     @DatabaseField
-    private LocalDateTime fechaHoraCreacion;
+    private String fechaHoraCreacion;
 
     /**
      * Fecha y hora en la que se modificó por última vez algún atributo del almacén
      */
     @DatabaseField
-    private LocalDateTime fechaHoraUltimaMod;
+    private String fechaHoraUltimaMod;
 
     /**
      * Nombre de usuario que modificó el almacén la última vez
@@ -53,7 +53,7 @@ public class Almacen {
     public Almacen (String nombre, String ubicacion) {
         this.nombre = nombre;
         this.ubicacion = ubicacion;
-        this.fechaHoraCreacion = LocalDateTime.now();
+        this.fechaHoraCreacion = String.valueOf(LocalDateTime.now());
     }
 
     public int getId() {
@@ -80,19 +80,19 @@ public class Almacen {
         this.ubicacion = ubicacion;
     }
 
-    public LocalDateTime getFechaHoraCreacion() {
+    public String getFechaHoraCreacion() {
         return fechaHoraCreacion;
     }
 
-    public void setFechaHoraCreacion(LocalDateTime fechaHoraCreacion) {
+    public void setFechaHoraCreacion(String fechaHoraCreacion) {
         this.fechaHoraCreacion = fechaHoraCreacion;
     }
 
-    public LocalDateTime getFechaHoraUltimaMod() {
+    public String getFechaHoraUltimaMod() {
         return fechaHoraUltimaMod;
     }
 
-    public void setFechaHoraUltimaMod(LocalDateTime fechaHoraUltimaMod) {
+    public void setFechaHoraUltimaMod(String fechaHoraUltimaMod) {
         this.fechaHoraUltimaMod = fechaHoraUltimaMod;
     }
 

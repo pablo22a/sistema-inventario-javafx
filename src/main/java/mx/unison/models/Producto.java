@@ -52,7 +52,7 @@ public class Producto {
      * Fecha de creación del producto
      */
     @DatabaseField
-    private LocalDateTime fechaCreacion;
+    private String fechaCreacion;
 
     /**
      * Fecha de la última modificación del producto
@@ -60,7 +60,7 @@ public class Producto {
      * Se actualiza cuando uno o más atributos son modificados
      */
     @DatabaseField
-    private LocalDateTime fechaModificacion;
+    private String fechaModificacion;
 
     /**
      * Nombre de usuario del último usuario en modificar el producto
@@ -76,7 +76,7 @@ public class Producto {
         this.cantidad = cantidad;
         this.precio = precio;
         this.almacen = almacen;
-        this.fechaCreacion = LocalDateTime.now();
+        this.fechaCreacion = String.valueOf(LocalDateTime.now());
     }
 
     public int getId() {
@@ -127,19 +127,19 @@ public class Producto {
         this.almacen = almacen;
     }
 
-    public LocalDateTime getFechaCreacion() {
+    public String getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+    public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalDateTime getFechaModificacion() {
+    public String getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(LocalDateTime fechaModificacion) {
+    public void setFechaModificacion(String fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 

@@ -37,7 +37,7 @@ public class Usuario {
      * Fecha y hora del último inicio de sesión del usuario.
      */
     @DatabaseField
-    private LocalDateTime fechaHoraUltimoInicio;
+    private String fechaHoraUltimoInicio;
 
     /**
      * Rol del usuario dentro del sistema.
@@ -52,7 +52,7 @@ public class Usuario {
         this.nombre = nombre;
         this.password = password;
         this.rol = rol;
-        this.fechaHoraUltimoInicio = LocalDateTime.now();
+        this.fechaHoraUltimoInicio = String.valueOf(LocalDateTime.now());
     }
 
     public int getId() {
@@ -79,11 +79,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public LocalDateTime getFechaHoraUltimoInicio() {
+    public String getFechaHoraUltimoInicio() {
         return fechaHoraUltimoInicio;
     }
 
-    public void setFechaHoraUltimoInicio(LocalDateTime fechaHoraUltimoInicio) {
+    public void setFechaHoraUltimoInicio(String fechaHoraUltimoInicio) {
         this.fechaHoraUltimoInicio = fechaHoraUltimoInicio;
     }
 
