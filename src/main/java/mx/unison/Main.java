@@ -1,18 +1,42 @@
 package mx.unison;
 
-import mx.unison.controller.Vistas;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import mx.unison.controllers.MainController;
+import mx.unison.database.DatabaseManager;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+/**
+ * Clase principal de la aplicación.
+ *
+ * Punto de entrada que inicializa la base de datos
+ * y muestra la vista de login.
+ */
+public class Main extends Application {
 
-public class Main {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            // Inicializar la base de datos
+            DatabaseManager dbManager = new DatabaseManager();
+
+            // Crear controlador principal
+            MainController mainController = new MainController(primaryStage, dbManager);
+
+            // Mostrar vista de login
+            mainController.showLoginView();
+
+        } catch (Exception e) {
+            System.err.println("Error al iniciar la aplicación: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Punto de entrada de la aplicación.
+     *
+     * @param args Argumentos de línea de comandos
+     */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception ignored) {}
-            Vistas vistas = new Vistas();
-            vistas.setVisible(true);
-        });
+        launch(args);
     }
 }
