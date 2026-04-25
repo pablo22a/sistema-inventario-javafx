@@ -1,30 +1,37 @@
 package mx.unison.util;
 
-import java.security.MessageDigest;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 /**
- * Clase para operaciones criptográficas simples.
+ * Clase para operaciones criptográficas.
  *
- * Actualmente contiene el método para generar hash MD5
- * de una cadena de texto.
+ * Actualmente contiene métodos para generar y verificar hashes BCrypt
+ * de contraseñas.
  */
 public class CryptoUtils {
 
     /**
-     * Genera el hash MD5 de una cadena de texto.
+     * Genera un hash BCrypt de una contraseña.
      *
-     * @param input Texto de entrada a convertir en hash.
-     * @return Hash MD5 en formato hexadecimal.
+     * @param password Contraseña en texto plano
+     * @return Hash BCrypt de la contraseña
      */
-    public static String md5(String input) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] digest = md.digest(input.getBytes("UTF-8"));
-            StringBuilder sb = new StringBuilder();
-            for (byte b : digest) sb.append(String.format("%02x", b));
-            return sb.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public static String hashPassword(String password) {
+        return BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    }
+
+    /**
+     * Verifica una contraseña contra su hash BCrypt.
+     *
+     * @param password Contraseña en texto plano
+     * @param hash Hash BCrypt almacenado
+     * @return true si la contraseña coincide con el hash, false en caso contrario
+     */
+    public static boolean verifyPassword(String password, String hash) {
+        BCrypt.Result result = BCrypt.verifyer().verify(
+                password.toCharArray(),
+                hash.toCharArray()
+        );
+        return result.verified;
     }
 }

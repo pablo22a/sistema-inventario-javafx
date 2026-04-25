@@ -8,6 +8,8 @@ import mx.unison.models.Almacen;
 import mx.unison.models.Producto;
 import mx.unison.models.Usuario;
 import mx.unison.database.dao.*;
+import mx.unison.util.CryptoUtils;
+
 import java.sql.SQLException;
 
 public class DatabaseManager {
@@ -54,7 +56,8 @@ public class DatabaseManager {
     private void createUserIfNotExists(String nombre, String password, String rol)
             throws SQLException {
         if (usuarioDao.getByNombre(nombre) == null) {
-            Usuario user = new Usuario(nombre, password, rol);
+            String hashedPassword = CryptoUtils.hashPassword(password);
+            Usuario user = new Usuario(nombre, hashedPassword, rol);
             usuarioDao.create(user);
         }
     }
