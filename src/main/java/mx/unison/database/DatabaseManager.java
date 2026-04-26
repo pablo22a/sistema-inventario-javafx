@@ -41,6 +41,18 @@ public class DatabaseManager {
     }
 
     /**
+     * Constructor alternativo que permite especificar una URL de base de datos personalizada.
+     * Útil para pruebas unitarias con bases de datos en memoria.
+     * @param databaseUrl URL JDBC de la base de datos a conectar.
+     * @throws SQLException Si hay problemas de conexión o creación de tablas.
+     */
+    public DatabaseManager(String databaseUrl) throws SQLException {
+        this.connectionSource = new JdbcConnectionSource(databaseUrl);
+        initializeDaos();
+        initializeTables();
+    }
+
+    /**
      * Inicializa los objetos DAO para cada entidad.
      * @throws SQLException Si ocurre un error al crear los DAOs.
      */
