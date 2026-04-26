@@ -173,6 +173,7 @@ O directamente desde las clases de prueba en el IDE.
 ## Documentación
 
 La documentación JavaDoc generada en HTML se encuentra en la carpeta `docs/javadoc/`.
+[Ver documentación JavaDoc](https://pablo22a.github.io/sistema-inventario-javafx/)
 
 ## Estructura de la base de datos
 
