@@ -94,9 +94,9 @@ public class AlmacenesViewController {
         ubicacionColumn.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getUbicacion()));
         fechaCreacionColumn.setCellValueFactory(cellData -> {
-            var fecha = cellData.getValue().getFechaHoraCreacion();
-            String fechaStr = fecha != null ? fecha.format(String.valueOf(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))) : "";
-            return new javafx.beans.property.SimpleStringProperty(fechaStr);
+            String fecha = cellData.getValue().getFechaHoraCreacion();
+            if (fecha == null || fecha.isEmpty()) return new javafx.beans.property.SimpleStringProperty("");
+            return new javafx.beans.property.SimpleStringProperty(fecha.substring(0, 16).replace("T", " "));
         });
         ultimoUsuarioColumn.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getUltimoUsuario()));

@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -302,6 +303,7 @@ public class UIUtils {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+        alert.initOwner(Stage.getWindows().stream().filter(w -> w.isShowing()).findFirst().orElse(null));
         alert.showAndWait();
     }
 
@@ -316,6 +318,7 @@ public class UIUtils {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+        alert.initOwner(Stage.getWindows().stream().filter(w -> w.isShowing()).findFirst().orElse(null));
         alert.showAndWait();
     }
 
@@ -330,6 +333,7 @@ public class UIUtils {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+        alert.initOwner(Stage.getWindows().stream().filter(w -> w.isShowing()).findFirst().orElse(null));
         alert.showAndWait();
     }
 
@@ -345,6 +349,7 @@ public class UIUtils {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+        alert.initOwner(Stage.getWindows().stream().filter(w -> w.isShowing()).findFirst().orElse(null));
         alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
         return alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;
     }

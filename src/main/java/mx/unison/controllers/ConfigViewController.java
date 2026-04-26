@@ -86,9 +86,11 @@ public class ConfigViewController {
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombre()));
         rolColumn.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getRol()));
-        ultimoInicioColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFechaHoraUltimoInicio()));
-
+        ultimoInicioColumn.setCellValueFactory(cellData -> {
+            String fecha = cellData.getValue().getFechaHoraUltimoInicio();
+            if (fecha == null || fecha.isEmpty()) return new javafx.beans.property.SimpleStringProperty("");
+            return new javafx.beans.property.SimpleStringProperty(fecha.substring(0,16).replace("T", " "));
+        });
         // Mostrar usuario activo
         usuarioActivoLabel.setText(usuarioActual);
 
